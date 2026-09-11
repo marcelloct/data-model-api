@@ -13,11 +13,13 @@ export function errorHandling(
   }
 
   if (error instanceof ZodError) {
-    return response.status(400).json({
-      message: 'Zod: Validation Error',
-      issues: z.treeifyError(error),
-    });
+    return response
+      .status(400)
+      .json({
+        message: 'Zod Validation Error: ',
+        issues: z.treeifyError(error),
+      });
   }
 
-  return response.status(500).json({ error: error.message });
+  return response.status(500).json({ message: error.message });
 }
